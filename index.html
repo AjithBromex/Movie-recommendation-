@@ -2,22 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Movie Recommendation App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Next Movie - Movie Recommender</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Movie Recommendation</h1>
-        <label for="genre-select">Choose a genre:</label>
-        <select id="genre-select">
-            <option value="action">Action</option>
-            <option value="comedy">Comedy</option>
-            <option value="sci-fi">Sci-Fi</option>
-            <option value="drama">Drama</option>
-        </select>
-        <button id="recommend-btn">Recommend</button>
-        <div id="recommendations"></div>
+    <main class="container">
+        <header>
+            <h1>Discover Your Next Favorite Film</h1>
+            <p class="description">Select a genre below to get a curated list of top-rated movies, complete with their ratings and reviews. Click a movie poster for more details!</p>
+        </header>
+
+        <section class="controls">
+            <div class="input-group">
+                <label for="genre-select" class="sr-only">Choose a genre:</label>
+                <select id="genre-select" aria-label="Select a movie genre">
+                    <option value="" disabled selected>-- Select a genre --</option>
+                    <option value="action">Action</option>
+                    <option value="comedy">Comedy</option>
+                    <option value="sci-fi">Sci-Fi</option>
+                    <option value="drama">Drama</option>
+                </select>
+            </div>
+            <button id="recommend-btn" aria-label="Get movie recommendations">Show Recommendations</button>
+        </section>
+
+        <section id="recommendations" class="recommendations-container">
+            <div class="placeholder">
+                <p>Choose a genre and click "Show Recommendations" to see movies here.</p>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <p>&copy; 2025 Movie Recommender App. All rights reserved.</p>
+    </footer>
+
+    <!-- The custom modal for displaying movie details -->
+    <div id="movie-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button id="close-modal-btn" class="close-btn">&times;</button>
+            <div id="modal-body">
+                <!-- Movie details will be dynamically inserted here -->
+            </div>
+        </div>
     </div>
+
     <script src="app.js"></script>
 </body>
 </html>
