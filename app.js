@@ -1,3 +1,4 @@
+import{moviedatabase} from "./moviedata.js";
 // Select the necessary DOM elements
 const genreSelect = document.getElementById('genre-select');
 const recommendBtn = document.getElementById('recommend-btn');
