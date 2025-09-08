@@ -10,7 +10,7 @@ const modalBody = document.getElementById('modal-body');
 const showModal = (movie) => {
     // Clear previous modal content
     modalBody.innerHTML = '';
-    
+
     // Create the modal content
     const modalContent = document.createElement('div');
     modalContent.innerHTML = `
@@ -23,6 +23,7 @@ const showModal = (movie) => {
             `).join('')}
         </div>
     `;
+
     modalBody.appendChild(modalContent);
     movieModal.classList.remove('hidden');
 };
@@ -32,55 +33,57 @@ const hideModal = () => {
     movieModal.classList.add('hidden');
 };
 
-// Add an event listener to the button
+// Event listener for "Recommend" button
 recommendBtn.addEventListener('click', () => {
-    // Get the selected genre from the dropdown
+    // Get the selected genre
     const selectedGenre = genreSelect.value;
-    
-    // Get the array of movies for the selected genre
+
+    // Get movies for the selected genre
     const movies = movieDatabase[selectedGenre];
 
     // Clear previous recommendations
     recommendationsDiv.innerHTML = '';
-    
-    // If no movies are found, display a message
+
+    // If no movies found, show placeholder
     if (!movies || movies.length === 0) {
         recommendationsDiv.innerHTML = '<p class="placeholder">No movies found for this genre.</p>';
         return;
     }
 
-    // Loop through the movies and create a card for each
+    // Loop through movies and create cards
     movies.forEach(movie => {
         const movieCard = document.createElement('div');
         movieCard.classList.add('movie-card');
 
-        // Create the poster image and add a click event listener
+        // Poster image
         const posterImg = document.createElement('img');
         posterImg.src = movie.poster;
         posterImg.alt = `${movie.title} poster`;
+
+        // Show modal when poster is clicked
         posterImg.addEventListener('click', () => {
             showModal(movie);
         });
 
-        // Create the movie info container
+        // Movie info container
         const movieInfo = document.createElement('div');
         movieInfo.classList.add('movie-info');
-        
-        // Create the title
+
+        // Title
         const title = document.createElement('h2');
         title.textContent = movie.title;
 
-        // Append everything to the movie card
+        // Append to card
         movieInfo.appendChild(title);
         movieCard.appendChild(posterImg);
         movieCard.appendChild(movieInfo);
 
-        // Append the movie card to the recommendations div
+        // Add card to recommendations div
         recommendationsDiv.appendChild(movieCard);
     });
 });
 
-// Add event listeners to close the modal
+// Event listeners to close modal
 closeModalBtn.addEventListener('click', hideModal);
 movieModal.addEventListener('click', (e) => {
     if (e.target === movieModal) {
@@ -88,7 +91,7 @@ movieModal.addEventListener('click', (e) => {
     }
 });
 
-// Disable body scrolling when modal is open
+// Handle body scrolling when modal is open
 document.addEventListener('DOMContentLoaded', () => {
     movieModal.addEventListener('transitionend', () => {
         if (!movieModal.classList.contains('hidden')) {
