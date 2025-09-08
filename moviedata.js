@@ -1,4 +1,4 @@
-const movieDatabase = [
+export const movieDatabase = [
        {
         genre: "Action",
         films: [
