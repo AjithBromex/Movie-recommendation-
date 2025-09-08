@@ -1,4 +1,6 @@
-import{moviedatabase} from "./moviedata.js";
+// Import the movie database
+import { movieDatabase } from "./moviedata.js";
+
 // Select the necessary DOM elements
 const genreSelect = document.getElementById('genre-select');
 const recommendBtn = document.getElementById('recommend-btn');
@@ -20,7 +22,7 @@ const showModal = (movie) => {
         <div class="modal-reviews">
             <h3>Reviews:</h3>
             ${movie.reviews.map(review => `
-                <p><strong>${review.author}:</strong> <em>"${review.content}"</em></p>
+                <p><strong>${review.Director}:</strong> <em>"${review.content}"</em></p>
             `).join('')}
         </div>
     `;
@@ -39,14 +41,15 @@ recommendBtn.addEventListener('click', () => {
     // Get the selected genre
     const selectedGenre = genreSelect.value;
 
-    // Get movies for the selected genre
-    const movies = movieDatabase[selectedGenre];
+    // Find the genre object in database
+    const genreObj = movieDatabase.find(g => g.genre === selectedGenre);
+    const movies = genreObj ? genreObj.films : [];
 
     // Clear previous recommendations
     recommendationsDiv.innerHTML = '';
 
     // If no movies found, show placeholder
-    if (!movies || movies.length === 0) {
+    if (movies.length === 0) {
         recommendationsDiv.innerHTML = '<p class="placeholder">No movies found for this genre.</p>';
         return;
     }
@@ -74,7 +77,7 @@ recommendBtn.addEventListener('click', () => {
         const title = document.createElement('h2');
         title.textContent = movie.title;
 
-        // Append to card
+        // Append elements
         movieInfo.appendChild(title);
         movieCard.appendChild(posterImg);
         movieCard.appendChild(movieInfo);
